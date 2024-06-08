@@ -6,30 +6,45 @@
 #define MAX_CHAR_COUNT_PER_LINE 100
 #define MAX_COLUMNS 50
 
-int main(int argc, char *argv[])
+char *promptTableName()
+{
+  char *tableName = (char *)malloc(100 * sizeof(char));
+
+  printf("Write your table name: ");
+
+  scanf("%s", tableName);
+
+  return tableName;
+}
+
+char *getFilePath(int argc, char *argv[])
 {
   if (argc <= 1)
   {
     printf("File path is missing.\n");
 
-    return 1;
+    return NULL;
   }
 
-  const char *filePath = argv[1];
+  return argv[1];
+}
+
+int main(int argc, char *argv[])
+{
+
   char csvRow[MAX_CHAR_COUNT_PER_LINE];
-  char tableColumns[MAX_COLUMNS][MAX_CHAR_COUNT_PER_LINE];
-  char columns[10000];
-  char tableName[100];
-  bool areColumnsStored = false;
+  const char *filePath = getFilePath(argc, argv);
+  char *tableName = promptTableName();
 
-  printf("Write your table name: ");
-  scanf("%s", tableName);
+  if (!filePath)
+    return 1;
 
-  FILE *pf;
+  FILE *
+      pf;
   pf = fopen(filePath, "r");
 
-  fgets(csvRow, MAX_CHAR_COUNT_PER_LINE, pf);
-  strcpy(columns, csvRow);
+  char columns[10000];
+  fgets(columns, MAX_CHAR_COUNT_PER_LINE, pf);
 
   while (feof(pf) != true)
   {
@@ -37,6 +52,8 @@ int main(int argc, char *argv[])
 
     printf("INSERT INTO %s (%s) VALUES (%s)\n", tableName, columns, csvRow);
   }
+
+  free(tableName);
 
   return 0;
 }
