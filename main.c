@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
   {
     fgets(csvRow, MAX_CHAR_COUNT_PER_LINE, pf);
 
-    printf("INSERT INTO %s (%s) VALUES (%s)\n", tableName, columns, csvRow);
+    printf("INSERT INTO %s (%s) VALUES (%s);\n", tableName, columns, csvRow);
   }
 
   free(tableName);
