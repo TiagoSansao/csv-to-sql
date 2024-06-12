@@ -34,10 +34,11 @@ int main(int argc, char *argv[])
 
   char csvRow[MAX_CHAR_COUNT_PER_LINE];
   const char *filePath = getFilePath(argc, argv);
-  char *tableName = promptTableName();
 
   if (!filePath)
     return 1;
+
+  char *tableName = promptTableName();
 
   FILE *
       pf;
