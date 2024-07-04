@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define MAX_CHAR_COUNT_PER_LINE 100
+#define MAX_CHAR_COUNT_PER_LINE 1000
 #define MAX_COLUMNS 50
 
 char *promptTableName()
